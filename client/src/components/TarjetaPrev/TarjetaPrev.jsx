@@ -2,8 +2,8 @@ import './TarjetaPrev.css'
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {addFeedback} from '../../store/actions/feedBack'
-import swal from 'sweetalert'
-
+//import swal from 'sweetalert'
+import swal from 'sweetalert2'
 export default function TarjetaPrev(props) {
     const [state, setState] = useState({
         commentary:'',
@@ -40,7 +40,7 @@ export default function TarjetaPrev(props) {
      }
     return(
         <div>         
-                <div class="card">
+                <div class="card-future">
                     <div class="flip-card">
                         <div class="flip-card__container">
                             <div class="card-front">
@@ -61,7 +61,6 @@ export default function TarjetaPrev(props) {
                                 <img className="imagenDentro" src={props.images} alt="no esta la imagen" />
                             </div>
                         </div>
-                    </div>
 
                     <div class="inside-page">
                         <div class="inside-page__container">
@@ -83,6 +82,8 @@ export default function TarjetaPrev(props) {
                             </p>
                         </div>
                     </div>
+                    </div>
+
                 </div>
         </div>
        

@@ -18,7 +18,10 @@ import {
   GET_COMMENTS_REQUEST,
   GET_COMMENTS_FAIL,
   GET_COMMENTS_SUCCESS,
-  REACT_APP_API
+  REACT_APP_API,
+  GET_LANDINGACTIVITY_REQUEST,
+  GET_LANDINGACTIVITY_SUCCESS,
+  GET_LANDINGACTIVITY_FAIL
 
 } from "../Consts/Consts"
 
@@ -30,6 +33,22 @@ export const getActivities = () => async (dispatch) => {
   } catch (err) {
     dispatch({
       type: GET_ACTIVITY_FAIL,
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
+export const getLandingActivities = () => async (dispatch) => {
+  dispatch({ type: GET_LANDINGACTIVITY_REQUEST });
+  try {
+    const { data } = await axios.get(`${REACT_APP_API}/activity/get/landingGet`);
+    dispatch({ type: GET_LANDINGACTIVITY_SUCCESS, payload: data });
+  } catch (err) {
+    dispatch({
+      type: GET_LANDINGACTIVITY_FAIL,
       payload:
         err.response && err.response.data.message
           ? err.response.data.message
@@ -55,8 +74,9 @@ export const getActivity = (id) => async (dispatch) => {
 };
 
 export const getFilterActivities =
-  (country, city, startDate, endDate, price, places, duration, initialTime) =>
+  (country, city, startDate, endDate, price, type, places, duration, initialTime ) =>
     async (dispatch) => {
+      console.log("Entrando a GER")
       dispatch({ type: GET_ACTIVITY_REQUEST });
       try {
         const { data } = await axios.post(
@@ -67,11 +87,13 @@ export const getFilterActivities =
             startDate,
             endDate,
             price,
+            type,
             places,
             duration,
             initialTime,
           }
         );
+        //console.log(data, "AQUI ESTA LA DATA")
         dispatch({ type: GET_ACTIVITY_SUCCESS, payload: data });
       } catch (err) {
         dispatch({

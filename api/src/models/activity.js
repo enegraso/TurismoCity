@@ -18,7 +18,7 @@ module.exports = function (sequelize) {
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: true,
       },
       price: {
@@ -52,6 +52,10 @@ module.exports = function (sequelize) {
       active: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
+      },
+       estadoAdmin: {
+        type: DataTypes.STRING,
+        allowNull: false, //3 estados posibles: 'CAN', 'ACE', 'PEN'
       },
     },
     {

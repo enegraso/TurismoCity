@@ -1,0 +1,11 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.carrouselFirst{
+  box-sizing: border-box;
+}
+
+.newstext{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+
+}

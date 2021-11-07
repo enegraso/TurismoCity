@@ -1,19 +1,44 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
+import { REACT_APP_DEV_TOOLS } from "./Consts/Consts"
 // import { reducerActivities } from "./reducers/reducerActivities";
 import reducerFlights from "./reducers/reducerFlights";
 import reducerPhoto from "./reducers/reducerPhoto";
 import reducerActivities from "./reducers/reducerActivities";
 import { userRegisterReducer, userSigninReducer } from "./reducers/reducerUser";
-import { activityDetailReducer, activityReducer, activityFavoriteReducer,feedBackReducer } from './reducers/reducerActivity'
+import { activityDetailReducer, activityReducer, activityFavoriteReducer, feedBackReducer, landingActivityReducer } from './reducers/reducerActivity'
 import { reducerActivitiesF } from "./reducers/reducerActivitiesF";
+
+import { reducerMyActivities } from "./reducers/reducerMyActivities"
+import { reducerFeedBack } from "./reducers/reducerFeedBack"
+import { reducerActivitiesPrev } from "./reducers/reducerActivitiesPrev"
+import {reducerUserSeller} from './reducers/reducerUserAdmin'
+import {reducerQuestion} from './reducers/reducerQuestion'
+import {reducerAnswer} from './reducers/reducerAnswer' 
+import { reducerPurchase } from "./reducers/reducerPurchase";
+import { reducerScheduler } from "./reducers/reducersScheduler"
+import { reducerWhishes } from "./reducers/reducerWhishes";
+import { reducerSuppliers } from "./reducers/reducerSupplier";
+import { newsReducer } from "./reducers/reduceNews";
+import { promoReducer } from './reducers/reducerPromo'
+import { countriesReducer, userCountryReducer } from "./reducers/reducerCountries";
+import {typeReducer} from "./reducers/reducerTypes"
+import { reducerCountryState } from "./reducers/reducerCountryState";
+//const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const composeEnhancers = REACT_APP_DEV_TOOLS === 'on' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : (null || compose);
+
 import { reducerMyActivities } from "./reducers/reducerMyActivities";
 import { reducerFeedBack } from "./reducers/reducerFeedBack";
 import { reducerActivitiesPrev } from "./reducers/reducerActivitiesPrev";
 
 const composeEnhancers = process.env.NODE_ENV === 'pruebas' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : (null || compose);
 
+
 const initialState = {
+  
+  userCountry: localStorage.getItem("userCountry")
+    ? JSON.parse(localStorage.getItem("userCountry"))
+    : "",
   url: localStorage.getItem("urlImage")
     ? JSON.parse(localStorage.getItem("urlImage"))
     : null,
@@ -41,7 +66,21 @@ const reducer = combineReducers({
   reducerMyActivities: reducerMyActivities,
   reducerFeedBack: reducerFeedBack,
   reducerActivitiesPrev: reducerActivitiesPrev,
-  comments: feedBackReducer
+  reducerUserSeller: reducerUserSeller,
+  comments: feedBackReducer,
+  reducerQuestion: reducerQuestion,
+  reducerAnswer: reducerAnswer,
+  reducerPurchase,
+  scheduled: reducerScheduler,
+  whishes: reducerWhishes,
+  infoSales: reducerSuppliers,
+  news: newsReducer,
+  promotions: promoReducer,
+  countries: countriesReducer,
+  userCountry: userCountryReducer,
+  landingActivities: landingActivityReducer,
+  types: typeReducer,
+  reducerCountryState
 })
 
 const store = createStore(

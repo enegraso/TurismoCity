@@ -12,10 +12,10 @@ import {
     REACT_APP_API
 } from '../Consts/Consts'
 
-export const register = (name, email, birthdate) => async (dispatch) => {
+export const register = (name, email, birthdate,picture) => async (dispatch) => {
     dispatch({ type: USER_REGISTER_REQUEST })
     try {
-        const { data } = await axios.post(`${REACT_APP_API}/user/register`, { name, email, birthdate })
+        const { data } = await axios.post(`${REACT_APP_API}/user/register`, { name, email, birthdate, picture })
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data })
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data })
         localStorage.setItem('userInfo', JSON.stringify(data))
@@ -60,5 +60,5 @@ export const logout = () => (dispath) => {
 //action que vacia el localstorage luego de vaciar auth0 user
 export const logoutlocal = () => (dispath) => {
     localStorage.removeItem('userInfo')
-    dispath({ type: USER_LOGOUT_LOC })
+    dispath({ type: USER_LOGOUT })
 }
